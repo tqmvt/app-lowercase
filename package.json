@@ -20,6 +20,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
+    "copy-to-clipboard": "^3.3.3",
     "lucide-react": "0.364.0",
     "next": "^14.1.4",
     "next-themes": "^0.3.0",

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
+import copy from "copy-to-clipboard"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -17,6 +18,8 @@ import {
 } from "@/components/ui/form"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
+
+import { Icons } from "../icons"
 
 const FormSchema = z.object({
   bio: z.string().min(2, {
@@ -78,7 +81,14 @@ export function TextareaForm() {
       {value && (
         <>
           <div>
-            <div>lowercase:</div>
+            <div className="flex items-center gap-2">
+              lowercase:{" "}
+              <Icons.copy
+                onClick={() => copy(value.toLowerCase())}
+                size={18}
+                className="cursor-pointer"
+              />
+            </div>
             <div>{value.toLowerCase()}</div>
           </div>
           <div>
