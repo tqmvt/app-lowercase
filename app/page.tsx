@@ -1,7 +1,4 @@
-import Link from "next/link"
-
-import { siteConfig } from "@/config/site"
-import { buttonVariants } from "@/components/ui/button"
+import { TextareaForm } from "@/components/feature/convert"
 
 export default function IndexPage() {
   return (
@@ -14,9 +11,8 @@ export default function IndexPage() {
           Input any string to convert
         </p>
       </div>
-      <div className="flex gap-4">
-       
-      </div>
+
+      <TextareaForm />
     </section>
   )
 }
