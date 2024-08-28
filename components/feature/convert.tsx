@@ -20,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 
 import { Icons } from "../icons"
+import { parseJson } from "@/lib/json"
 
 const FormSchema = z.object({
   bio: z.string().min(2, {
@@ -98,6 +99,10 @@ export function TextareaForm() {
           <div>
             <div>Capitalize:</div>
             <div className="capitalize">{value}</div>
+          </div>
+          <div className="mt-10">
+            <div>JSON:</div>
+            <div >{parseJson(value)}</div>
           </div>
         </>
       )}
