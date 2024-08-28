@@ -6,6 +6,7 @@ import copy from "copy-to-clipboard"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
+import { parseJson, parseJsonWithoutClean } from "@/lib/json"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -20,11 +21,10 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 
 import { Icons } from "../icons"
-import { parseJson } from "@/lib/json"
 
 const FormSchema = z.object({
   bio: z.string().min(2, {
-    message: "Bio must be at least 2 characters.",
+    message: "Text must be at least 2 characters.",
   }),
   // .max(160, {
   //   message: "Bio must not be longer than 30 characters.",
@@ -54,18 +54,18 @@ export function TextareaForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-2/3 space-y-6"
+          className="w-2/3 space-y-6 mt-5"
         >
           <FormField
             control={form.control}
             name="bio"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Bio</FormLabel>
+                <FormLabel>Text</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Tell us a little bit about yourself"
-                    className="resize-none"
+                    className="resize-none w-full"
                     {...field}
                   />
                 </FormControl>
@@ -81,7 +81,7 @@ export function TextareaForm() {
       </Form>
       {value && (
         <>
-          <div>
+          <div className="mt-10">
             <div className="flex items-center gap-2">
               lowercase:{" "}
               <Icons.copy
@@ -90,19 +90,21 @@ export function TextareaForm() {
                 className="cursor-pointer"
               />
             </div>
-            <div>{value.toLowerCase()}</div>
+            <div className="w-11/12 break-words">{value.toLowerCase()}</div>
           </div>
-          <div>
+          <div className="mt-10">
             <div>UPPERCASE:</div>
-            <div>{value.toUpperCase()}</div>
+            <div className="w-11/12 break-words">{value.toUpperCase()}</div>
           </div>
-          <div>
+          <div className="mt-10">
             <div>Capitalize:</div>
-            <div className="capitalize">{value}</div>
+            <div className="capitalize w-11/12 break-words">{value}</div>
           </div>
           <div className="mt-10">
             <div>JSON:</div>
-            <div >{parseJson(value)}</div>
+            <div className="w-11/12 break-words">
+              {parseJsonWithoutClean(value) || "N/A"}
+            </div>
           </div>
         </>
       )}
